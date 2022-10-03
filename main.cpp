@@ -13,7 +13,7 @@ int main() {
     v1.push_back(6);
     v1.push_back(5);
     v1.show();
-    v1.replace(4,0);
+    v1.replace(4, 0);
     v1.show();
     //std::sort(v1.begin(), v1.end());
 
@@ -23,7 +23,7 @@ int main() {
     v2.show();
 
     FVector<char>::iterator it = v2.begin();
-    while(!(it == v2.end())){
+    while (!(it == v2.end())) {
         std::cout << *it << std::endl;
         ++it;
     }
