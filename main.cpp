@@ -7,15 +7,15 @@
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
-    FVector<int> v1;
-    v1.push_back(1);
-    v1.push_back(2);
-    v1.push_back(6);
-    v1.push_back(5);
-    v1.show();
-    v1.replace(4, 0);
-    v1.show();
-    //std::sort(v1.begin(), v1.end());
+    FVector<int> *v1;
+    v1->push_back(1);
+    v1->push_back(2);
+    v1->push_back(6);
+    v1->push_back(5);
+    v1->show();
+    v1->replace(4, 0);
+    v1->show();
+    std::sort(v1->begin(), v1->end(), v1);
 
     FVector<char> v2;
     v2.push_back('A');

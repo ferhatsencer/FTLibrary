@@ -18,8 +18,8 @@ public:
         size = 0;
     }
 
-    FVector(const FVector &value) {
-        size = value.size;
+    FVector(const FVector &value) : size(value.size) {
+        //size = value.size;
         array = new T[value.size];
         for (int index = 0; index < value.size; ++index)
             array[index] = value.array[index];
@@ -139,6 +139,17 @@ public:
     bool operator==(const iterator &b) const {
         return *current == *b.current;
     }
+
+    bool operator<(const iterator &b) const {
+        
+        return *current < *b.current;//need to be implemented < operator overload.
+    }
+
+    using iterator_category = std::output_iterator_tag;
+    using difference_type = std::ptrdiff_t;
+    using value_type = T;
+    using pointer = value_type *;
+    using reference = value_type &;
 
 };
 

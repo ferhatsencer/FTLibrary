@@ -22,28 +22,23 @@ struct FLinkedList {
 template<class T>
 class FList {
     int m_size;
-    FLinkedList<T> *_begin;
-    FLinkedList<T> *_end;
+    FLinkedList<T> *m_begin;
+    FLinkedList<T> *m_end;
 
 public:
     FList() {
-        _begin = 0;
-        _end = 0;
+        m_begin = 0;
+        m_end = 0;
         m_size = 0;
     }
 
-    FList(const FList &value) {
-        _begin = 0;
-        _end = 0;
-        m_size = 0;
-
-        for (FLinkedList<T> *current = value._begin; current != 0; current = current->next)
+    FList(const FList &value) : m_begin(0), m_end(0), m_size(0) {
+        for (FLinkedList<T> *current = value.m_begin; current != 0; current = current->next)
             push_back(current->value);
-
     }
 
     ~FList() {
-        FLinkedList<T> *first = _begin;
+        FLinkedList<T> *first = m_begin;
         while (first != 0) {
             FLinkedList<T> *next = first->next;
             delete first;
@@ -53,15 +48,13 @@ public:
 
     FList<T> &operator=(const FList<T> &value) {
         if (this == value) { return *this; }
-        FList<T> *tmp = _begin;
-        while (_begin) {
-            tmp = _begin;
-            _begin = _begin->next;
-            delete tmp;
+        FList<T> *tmp = m_begin;
+        for (tmp = m_begin; m_begin != nullptr; delete tmp) {
+            m_begin = m_begin->next;
         }
         m_size = value.m_size;
-        _begin = value._begin;
-        _end = value._end;
+        m_begin = value.m_begin;
+        m_end = value.m_end;
     }
 
     bool is_empty();
@@ -74,19 +67,19 @@ public:
 
         FLinkedList<T> *temp = new FLinkedList<T>(value);
 
-        if (_begin == 0) {
-            _begin = _end = temp;
+        if (m_begin == 0) {
+            m_begin = m_end = temp;
         } else {
-            temp->previous = _end;
-            _end->next = temp;
-            _end = temp;
+            temp->previous = m_end;
+            m_end->next = temp;
+            m_end = temp;
         }
         m_size++;
     }
 
     void show() {
-        FLinkedList<T> *temp = _begin;
-        while (_begin->next != nullptr) {
+        FLinkedList<T> *temp = m_begin;
+        while (m_begin->next != nullptr) {
             std::cout << temp->value;
             temp = temp->next;
         }
@@ -95,11 +88,11 @@ public:
     class iterator;
 
     iterator begin() {
-        return iterator(_begin);
+        return iterator(m_begin);
     }
 
     iterator end() {
-        return iterator(_end);
+        return iterator(m_end);
     }
 };
 
