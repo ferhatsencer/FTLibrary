@@ -12,7 +12,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-add_executable(FTLibrary main.cpp FList.h FVector.h test.cpp)
+add_executable(FTLibrary main.cpp List.h Vector.h test.cpp)
 target_link_libraries(FTLibrary gtest_main)
 add_test(NAME test COMMAND FTLibrary)
 

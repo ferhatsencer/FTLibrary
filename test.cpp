@@ -4,13 +4,13 @@
 //
 //#include "gtest/gtest.h"
 //
-//#include "FVector.h"
-//#include "FList.h"
+//#include "Vector.h"
+//#include "List.h"
 //
-//TEST(FVector, 0)
+//TEST(Vector, 0)
 //{
-//FVector<char> v;
-//FVector<char> temp = v;
+//Vector<char> v;
+//Vector<char> temp = v;
 //
 //v.push_back('a');
 //v.push_back('x');
@@ -21,15 +21,15 @@
 //EXPECT_EQ(v.getElement(2), temp.getElement(2));
 //}
 //
-//TEST(FVector, 0)
+//TEST(Vector, 0)
 //{
-//    FVector<int> v;
+//    Vector<int> v;
 //
 //    v.push_back(1);
 //    EXPECT_EQ(1, *v.begin());
 //
 //    v[0] = -1;
-//    FVector<int>::iterator itr = v.begin();
+//    Vector<int>::iterator itr = v.begin();
 //    EXPECT_EQ(-1, *itr);
 //
 //    ++itr;
