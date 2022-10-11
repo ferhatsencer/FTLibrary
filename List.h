@@ -21,7 +21,7 @@ namespace FerhatLib {
 
     template<class T>
     class List {
-        int m_size;
+        int m_size{};
         LList<T> *m_begin;
         LList<T> *m_end;
 
@@ -46,13 +46,11 @@ namespace FerhatLib {
             }
         }
 
-//        List(std::initializer_list<T> l) : m_begin(l) {
-//            std::cout << "constructed with a " << l.m_size() << "-element list\n";
-//        }
-
-//        void append(std::initializer_list<T> l) {
-//            m_begin.insert(m_begin.end(), l.begin(), l.end());
-//        }
+        List(std::initializer_list<T> value) {
+            for (auto element: value) {
+                push_back(element);
+            }
+        }
 
         void push_back(const List<T> &value);
 
@@ -82,24 +80,25 @@ namespace FerhatLib {
 
         void push_back(const T &value) {
 
-            auto *temp = new LList<T>(value);
+            auto *temp = m_begin;
 
-            if (m_begin == 0) {
-                m_begin = m_end = temp;
+            if (m_begin == nullptr) {
+                m_begin = m_end = new LList<T>(value);
             } else {
-                temp->previous = m_end;
-                m_end->next = temp;
-                m_end = temp;
+//                temp->previous = m_end;
+//                m_end->next = temp;
+//                m_end = temp;
+                while (temp->next != nullptr)
+                    temp = temp->next;
+
+                temp->next = new LList<T>(value);
             }
             m_size++;
         }
 
         void show() {
-            LList<T> *temp = m_begin;
-            while (m_begin->next != nullptr) {
+            for (LList<T> *temp = m_begin; m_begin->next != nullptr; temp = temp->next)
                 std::cout << temp->value;
-                temp = temp->next;
-            }
         }
 
         class iterator;
