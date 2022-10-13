@@ -5,6 +5,8 @@
 #ifndef FTLIBRARY_LIST_H
 #define FTLIBRARY_LIST_H
 
+#include <iostream>
+
 namespace FerhatLib {
 
     template<class T>
@@ -26,31 +28,13 @@ namespace FerhatLib {
         LList<T> *m_end;
 
     public:
-        List() {
-            m_begin = 0;
-            m_end = 0;
-            m_size = 0;
-        }
+        List();
 
-        List(const List &value) : m_begin(0), m_end(0), m_size(0) {
-            for (LList<T> *current = value.m_begin; current != 0; current = current->next)
-                push_back(current->value);
-        }
+        List(const List &value);
 
-        ~List() {
-            LList<T> *first = m_begin;
-            while (first != 0) {
-                LList<T> *next = first->next;
-                delete first;
-                first = next;
-            }
-        }
+        ~List();
 
-        List(std::initializer_list<T> value) {
-            for (auto element: value) {
-                push_back(element);
-            }
-        }
+        List(std::initializer_list<T> value);
 
         void push_back(const List<T> &value);
 
@@ -66,40 +50,11 @@ namespace FerhatLib {
 
         bool is_empty();
 
-        List<T> &operator=(const List<T> &value) {
-            if (this == value) { return *this; }
-            List<T> *tmp = m_begin;
-            for (tmp = m_begin; m_begin != nullptr; delete tmp) {
-                m_begin = m_begin->next;
-            }
-            m_size = value.m_size;
-            m_begin = value.m_begin;
-            m_end = value.m_end;
-        }
+        List<T> &operator=(const List<T> &value);
 
+        void push_back(const T &value);
 
-        void push_back(const T &value) {
-
-            auto *temp = m_begin;
-
-            if (m_begin == nullptr) {
-                m_begin = m_end = new LList<T>(value);
-            } else {
-//                temp->previous = m_end;
-//                m_end->next = temp;
-//                m_end = temp;
-                while (temp->next != nullptr)
-                    temp = temp->next;
-
-                temp->next = new LList<T>(value);
-            }
-            m_size++;
-        }
-
-        void show() {
-            for (LList<T> *temp = m_begin; m_begin->next != nullptr; temp = temp->next)
-                std::cout << temp->value;
-        }
+        void show();
 
         class iterator;
 
@@ -119,29 +74,18 @@ namespace FerhatLib {
 
     public:
 
-        iterator() {
-            current = 0;
-        }
+        iterator();
 
 //    iterator(LList<T>* v){
 //        current = v;
 //    }
-        explicit iterator(iterator<T> *v) {
-            current = v->current;
-        }
+        explicit iterator(iterator<T> *v);
 
-        T &operator*() {
-            return current->value;
-        }
+        T &operator*();
 
-        iterator operator++() {
-            current++;
-            return *this;
-        }
+        iterator operator++();
 
-        bool operator==(const iterator &value) const {
-            return (this->current == value.current);
-        }
+        bool operator==(const iterator &value) const;
 
     };
 
