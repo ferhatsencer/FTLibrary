@@ -15,7 +15,7 @@ namespace FerhatLib {
 
     using namespace std;
 
-    template<class T>
+    template<typename T>
     class Vector {
         T *array;
         int m_size;
@@ -83,7 +83,7 @@ namespace FerhatLib {
 
     };
 
-    template<class T>
+    template<typename T>
     class Vector<T>::iterator {
 
         T *current;
@@ -121,14 +121,14 @@ namespace FerhatLib {
 
 }
 
-template<class T>
+template<typename T>
 FerhatLib::Vector<T>::Vector() {
     array = new T[ARRAY_CAPACITY];
     capacity = ARRAY_CAPACITY;
     m_size = 0;
 }
 
-template<class T>
+template<typename T>
 FerhatLib::Vector<T>::Vector(const Vector &value) : m_size(value.m_size) {
 
     array = new T[value.m_size];
@@ -136,13 +136,13 @@ FerhatLib::Vector<T>::Vector(const Vector &value) : m_size(value.m_size) {
         array[index] = value.array[index];
 }
 
-template<class T>
+template<typename T>
 FerhatLib::Vector<T>::~ Vector() {
     delete[] array;
 }
 
-template<class T>
-FerhatLib::Vector<T> &FerhatLib::Vector<T>::operator=(const Vector<T> &value) {
+template<typename T>
+FerhatLib::Vector<T> &FerhatLib::Vector<T>::operator=(const Vector <T> &value) {
     if (this == &value) { return *this; }
 
     if (value.m_size <= capacity) {
@@ -165,13 +165,13 @@ FerhatLib::Vector<T> &FerhatLib::Vector<T>::operator=(const Vector<T> &value) {
     return *this;
 }
 
-template<class T>
+template<typename T>
 T FerhatLib::Vector<T>::getElement(int index) {
     if (index < m_size)
         return array[index];
 }
 
-template<class T>
+template<typename T>
 void FerhatLib::Vector<T>::reserve(int value) {
     if (value <= capacity) return;
 
@@ -188,7 +188,7 @@ void FerhatLib::Vector<T>::reserve(int value) {
 
 }
 
-template<class T>
+template<typename T>
 void FerhatLib::Vector<T>::push_back(T data) {
     if (m_size >= capacity) {//look later there could be logical mistake
         T *temp = new T[ARR_RESIZE_CAPACITY * capacity];
@@ -206,7 +206,7 @@ void FerhatLib::Vector<T>::push_back(T data) {
     m_size++;
 }
 
-template<class T>
+template<typename T>
 void FerhatLib::Vector<T>::replace(T data, int index) {
     if (index == capacity)
         push_back(data);
@@ -214,7 +214,7 @@ void FerhatLib::Vector<T>::replace(T data, int index) {
         array[index] = data;
 }
 
-template<class T>
+template<typename T>
 void FerhatLib::Vector<T>::show() {
     for (int i = 0; i < m_size; i++) {
         cout << array[i] << " ";

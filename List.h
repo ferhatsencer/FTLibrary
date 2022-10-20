@@ -9,7 +9,7 @@
 
 namespace FerhatLib {
 
-    template<class T>
+    template<typename T>
     struct LList {
         explicit LList(const T &v) : value(v), next(nullptr), previous(nullptr) {
 
@@ -21,7 +21,7 @@ namespace FerhatLib {
     };
 
 
-    template<class T>
+    template<typename T>
     class List {
         int m_size{};
         LList<T> *m_begin;
@@ -68,7 +68,7 @@ namespace FerhatLib {
     };
 
 
-    template<class T>
+    template<typename T>
     class iterator {
         T *current;
 
@@ -91,12 +91,12 @@ namespace FerhatLib {
 
 }
 
-template<class T>
+template<typename T>
 FerhatLib::List<T>::List(): m_begin(0), m_end(0), m_size(0) {
 
 }
 
-template<class T>
+template<typename T>
 FerhatLib::List<T>::List(const List &l) : m_begin(0), m_end(0), m_size(0) {
     for (LList<T> *current = l.m_begin; current != nullptr; current = current->next)
         push_back(current->value);
@@ -112,14 +112,14 @@ FerhatLib::List<T>::~List() {
     }
 }
 
-template<class T>
+template<typename T>
 FerhatLib::List<T>::List(std::initializer_list<T> value) {
     for (auto element: value) {
         push_back(element);
     }
 }
 
-template<class T>
+template<typename T>
 FerhatLib::List<T> &FerhatLib::List<T>::operator=(const List<T> &value) {
     if (this == value) { return *this; }
     List<T> *tmp = m_begin;
@@ -131,7 +131,7 @@ FerhatLib::List<T> &FerhatLib::List<T>::operator=(const List<T> &value) {
     m_end = value.m_end;
 }
 
-template<class T>
+template<typename T>
 void FerhatLib::List<T>::push_back(const T &value) {
 
     auto temp = m_begin;
@@ -151,7 +151,7 @@ void FerhatLib::List<T>::push_back(const T &value) {
     m_size++;
 }
 
-template<class T>
+template<typename T>
 void FerhatLib::List<T>::show() {
     auto temp = m_begin;
     if (temp == nullptr) {
@@ -164,38 +164,38 @@ void FerhatLib::List<T>::show() {
     }
 }
 
-//template<class T>
+//template<typename T>
 //iterator FerhatLib::List<T>::begin() {
 //    return iterator(m_begin);
 //}
 //
-//template<class T>
+//template<typename T>
 //iterator FerhatLib::List<T>::end() {
 //    return iterator(m_end);
 //}
 
-template<class T>
+template<typename T>
 FerhatLib::iterator<T>::iterator(): current(0) {
 
 }
 
-template<class T>
+template<typename T>
 FerhatLib::iterator<T>::iterator(iterator<T> *v): current(v->current) {
 
 }
 
-template<class T>
+template<typename T>
 T &FerhatLib::iterator<T>::operator*() {
     return current->value;
 }
 
-template<class T>
+template<typename T>
 FerhatLib::iterator<T> FerhatLib::iterator<T>::operator++() {
     current++;
     return *this;
 }
 
-template<class T>
+template<typename T>
 bool FerhatLib::iterator<T>::operator==(const iterator &value) const {
     return (this->current == value.current);
 }

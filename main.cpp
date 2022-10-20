@@ -48,10 +48,7 @@ int main() {
     l2.push_back(32);
     l2.push_back(33);
     l2.show();
-
-
-//    FerhatLib::List<float> l2 = {2.1, 3.1, 4.1};
-//    l2.show();
+    
 
     return 0;
 }
