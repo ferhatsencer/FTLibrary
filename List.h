@@ -24,8 +24,8 @@ namespace FerhatLib {
     template<typename T>
     class List {
         int m_size{};
-        LList<T> *m_begin;
-        LList<T> *m_end;
+        LList<T> *m_begin{};
+        LList<T> *m_end{};
 
     public:
         List();
@@ -134,19 +134,19 @@ FerhatLib::List<T> &FerhatLib::List<T>::operator=(const List<T> &value) {
 template<typename T>
 void FerhatLib::List<T>::push_back(const T &value) {
 
-    auto temp = m_begin;
-
-    if (temp == nullptr) {
-        m_begin = m_end = new LList<T>(value); //m_end handle?
+//    auto temp = m_begin;
+    auto temp = new LList<T>(value);
+    if (m_begin == nullptr) {
+        m_begin = m_end = temp;
     } else {
-//                temp->previous = m_end;
-//                m_end->next = temp;
-//                m_end = temp;
-        while (temp->next != nullptr)
-            temp = temp->next;
+        temp->previous = m_end;
+        m_end->next = temp;
+        m_end = temp;
+//        while (temp->next != nullptr)
+//            temp = temp->next;
 
-        temp->next = new LList<T>(value);
-        m_end = temp->next;
+//        temp->next = new LList<T>(value);
+//        m_end = temp->next;
     }
     m_size++;
 }

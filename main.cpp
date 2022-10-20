@@ -48,7 +48,17 @@ int main() {
     l2.push_back(32);
     l2.push_back(33);
     l2.show();
-    
+
+//    FerhatLib::List<int>::iterator it2 = l2.begin();
+//    while (!(it2 == l2.end())) {
+//        std::cout << *it2 << std::endl;
+//        ++it2;
+//    }
+
+    FerhatLib::List<char> l3 = {'a', 'b', 'c'};
+    l3.push_back('a');
+    l3.push_back('b');
+    l3.show();
 
     return 0;
 }
